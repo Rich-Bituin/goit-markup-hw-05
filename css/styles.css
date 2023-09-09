@@ -9,6 +9,9 @@
   --color-grey: #2e2f42;
   --color-light-slate: #8e8f99;
   --color-green: #31d0aa;
+  --color-dairy: #fcfcfc;
+
+  --transition-duration: 250ms;
 }
 
 * {
@@ -36,6 +39,10 @@ p {
   margin: 0;
 }
 
+figure {
+  margin: 0;
+}
+
 ul {
   list-style: none;
   padding-left: 0;
@@ -54,6 +61,8 @@ img {
 
 .link {
   text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -70,7 +79,7 @@ img {
 .header-container {
   display: flex;
   align-items: center;
-  padding: 24px 15px;
+  padding: 23px 15px;
 }
 
 .logo-web,
@@ -100,6 +109,7 @@ img {
 .header-nav-list-item {
   color: var(--color-navy-blue);
   font-weight: 500;
+  height: 24px;
 }
 
 .header-nav-list-link.active {
@@ -121,6 +131,18 @@ img {
 .header-address-mail:hover,
 .header-address-tel:hover {
   color: var(--color-ocean);
+  transition: color var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-nav-list-link.active::after {
+  content: '';
+  width: inherit;
+  height: 4px;
+  background-image: linear-gradient(var(--color-ocean), var(--color-ocean));
+  display: block;
+  border-radius: 2px;
+  position: relative;
+  top: 20px;
 }
 
 .section {
@@ -176,6 +198,7 @@ img {
 .hero-button:active {
   background: var(--color-ocean);
   cursor: pointer;
+  transition: background var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .features {
@@ -299,6 +322,8 @@ img {
 
 .team-links-list-address:hover {
   background-color: var(--color-ocean);
+  transition: background-color var(--transition-duration)
+    cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer {
@@ -352,6 +377,9 @@ img {
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12),
     0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 3px 1px 0px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--color-ocean);
+  transition-property: background, color, box-shadow, border;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-selection-list {
@@ -367,6 +395,31 @@ img {
   cursor: pointer;
 }
 
+.portfolio-selection-list-figure {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-selection-list-figure-caption {
+  color: var(--color-cloud);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 40px 32px 164px;
+  background-image: linear-gradient(var(--color-iris), var(--color-iris));
+  transition: transform var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.portfolio-selection-list-items:hover .portfolio-selection-list-figure-caption {
+  transform: translateY(0);
+}
+
 .portfolio-selection-list-items-content {
   border: 1px solid var(--color-cornflower);
   padding: 32px 16px;
@@ -379,6 +432,7 @@ img {
     0px 1px 1px 0px rgba(46, 47, 66, 0.16),
     0px 1px 6px 0px rgba(46, 47, 66, 0.08);
   border-top: 0;
+  transition: box-shadow var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-selection-list-items-header {
@@ -426,6 +480,9 @@ img {
 .clients-list-icon:active {
   fill: var(--color-ocean);
   border: 1px solid var(--color-ocean);
+  transition-property: fill, border;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-container {
@@ -462,4 +519,66 @@ img {
 
 .footer-socials-link-list-address:hover {
   background-color: var(--color-green);
+  transition: background-color var(--transition-duration)
+    cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(46, 47, 66, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: auto;
+  opacity: 1;
+  transition-property: visibity, opacity;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal.is-hidden .modal-content {
+  transform: scale(0.5);
+}
+
+.modal-content {
+  background-color: var(--color-dairy);
+  width: 408px;
+  height: 584px;
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+  border-radius: 4px;
+  position: relative;
+  transform: none;
+  transition: transform var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: var(--color-cornflower);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.modal-close svg {
+  color: var(--color-navy-blue);
+  width: 8px;
+  height: 8px;
 }
